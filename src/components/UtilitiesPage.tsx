@@ -14,11 +14,9 @@ const useStyles = makeStyles({
     header: {
         display: "flex",
         alignItems: "flex-start",
-        //textAlign: 'left',
         margin: "2.5rem 0 1rem 3rem",
     },
     title: {
-        // textAlign: 'left',
         fontFamily: "Futura, sans-serif",
         fontWeight: "normal",
         color: COLORS.grayFont,

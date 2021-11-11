@@ -6,9 +6,10 @@ import { COLORS } from '../constants/Colors';
 
 const useStyles = makeStyles({
     root: {
-        margin: "2rem auto auto 5rem",
+        margin: "2rem auto auto 2rem",
+        backgroundColor: COLORS.whiteBackground,
         width: "50%",
-        border: "0.1px solid #707070",
+        border: "0.1px solid #70707020",
         borderRadius: "20px",
         padding: "1.5rem 3.5rem 3.5rem 1.5rem"
     },
