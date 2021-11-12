@@ -64,7 +64,7 @@ const utilityData: any[] = [
                   fill: false,
                   backgroundColor: COLORS.red,
                   borderColor: COLORS.red + "80",
-                  tension: 0.1,
+                  tension: 1,
               },
           ]
           },
@@ -94,7 +94,7 @@ const utilityData: any[] = [
                   fill: false,
                   backgroundColor: COLORS.lightGreen,
                   borderColor: COLORS.lightGreen + "80",
-                  tension: 0.1,
+                  tension: 1,
               },
           ]
           },
@@ -124,7 +124,7 @@ const utilityData: any[] = [
                   fill: false,
                   backgroundColor: COLORS.yellow,
                   borderColor: COLORS.yellow + "80",
-                  tension: 0.1,
+                  tension: 1,
               },
           ]
           } ,

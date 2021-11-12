@@ -19,6 +19,8 @@ const useStyles = makeStyles({
     backgroundColor: "#DEDEDE"
   },
   title: {
+    textAlign: "left",
+    margin: "2.5rem 0 -0.1rem 2.5rem",
     fontFamily: "Futura, sans-serif",
     fontWeight: "normal",
     color: COLORS.grayFont

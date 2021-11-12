@@ -9,6 +9,7 @@ export const COLORS = {
     whiteBackground: "#FCFCFC",
     gray: "#737373",
     grayFont: "#646464",
+    grayIcon: "#BEBEBE",
     darkBlue: "#022859",
 
 
