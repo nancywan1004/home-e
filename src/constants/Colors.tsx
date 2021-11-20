@@ -5,6 +5,7 @@ export const COLORS = {
     lightGreen: "#81f8a5",
     yellow: "#fae34d",
     highlightYellow: "#facf4c",
+    budgetLimitYellow: "rgba(255, 230, 0, 0.85)",
     white: "#ffffff",
     whiteBackground: "#FCFCFC",
     gray: "#737373",
