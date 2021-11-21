@@ -38,9 +38,9 @@ export function LightControl(props: any) {
           setOnOff(!isOn);
         }}
         >
-          <img className={classes.roomIcon} src={props.iconUrl}
-          >
-          </img>
+          <div>
+            <img className={classes.roomIcon} src={props.iconUrl}></img>
+          </div>
           <span className={classes.roomTitle}>{props.title}</span>
       </div>
     )

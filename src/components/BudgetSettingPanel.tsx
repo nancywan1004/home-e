@@ -12,7 +12,7 @@ const useStyles = makeStyles({
         width: "40%",
         border: "0.1px solid #70707020",
         borderRadius: "20px",
-        padding: "1.5rem 3.5rem 3.5rem 1.5rem"
+        padding: "1.5rem 3.5rem 1.5rem 1.5rem"
     },
     greeting: {
         fontFamily: "utopia-std, serif",
@@ -35,7 +35,11 @@ const useStyles = makeStyles({
     },
     budgetBody: {
         display: "flex",
-        justifyContent: "space-between"
+        justifyContent: "space-evenly"
+    },
+    budgetUsage: {
+        display: "flex",
+        justifyContent: "space-evenly",
     }
 });
 
@@ -60,9 +64,11 @@ export function BudgetSettingPanel(props: any) {
     const handleOpen = () => setOpen(true);
     const handleClose = () => setOpen(false);
     const [budget, setBudget] = useState(12.00);
-    const handleBudgetSetting: any = (newBudget: any) => {
-        console.log("newBudget is: " + newBudget);
+    const [coffee, setCoffee] = useState(0.00);
+    const handleBudgetSetting: any = (newBudget: any, newCoffee: any) => {
+        console.log("newCoffee is: " + newCoffee);
         setBudget(newBudget);
+        setCoffee(newCoffee);
     }
     return (
         <div className={classes.root}>
@@ -83,10 +89,20 @@ export function BudgetSettingPanel(props: any) {
                     aria-labelledby="modal-modal-title"
                     aria-describedby="modal-modal-description"
                 >
-                <BudgetSettingPopup budget={budget} handlePopupClose={handleClose} handleBudgetSetting={(newBudget: any) => handleBudgetSetting(newBudget)}></BudgetSettingPopup>
+                <BudgetSettingPopup budget={budget} coffee={coffee} handlePopupClose={handleClose} handleBudgetSetting={(newBudget: any, newCoffee: any) => handleBudgetSetting(newBudget, newCoffee)}></BudgetSettingPopup>
                 </Modal>
                 </Grid>
             </Grid>
+            <div className={classes.budgetUsage}>
+                <Box sx={{color: COLORS.grayFont, fontFamily: "Futura, sans-serif", padding: "-1rem 0 -1rem 0"}}>
+                    <h2 style={{fontWeight: "bold" }}>${8.00.toFixed(2)}</h2>
+                    <p style={{alignSelf: "flex-end", fontWeight: "normal", marginLeft: "1rem"}}>This Week</p>
+                </Box>
+                <Box sx={{color: COLORS.grayFont, fontFamily: "Futura, sans-serif", padding: "-1rem 0 -1rem 0"}}>
+                    <h2 style={{ fontWeight: "bold" }}>${8.10.toFixed(2)}</h2>
+                    <p style={{alignSelf: "flex-end", fontWeight: "normal", marginLeft: "1rem"}}>Last Week</p>
+                </Box>
+            </div>
         </div>
     )
 }

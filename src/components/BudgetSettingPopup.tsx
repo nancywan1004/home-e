@@ -20,22 +20,22 @@ const style = {
   padding: "2rem",
 };
 
-const StyledButton = withStyles({
-    root: {
-      float: "right",
-      borderRadius: "20px",
-      padding: "1rem",
-      fontSize: "24px",
-      fontFamily: "Futura, sans-serif",
-      fontWeight: "bold",
-      backgroundColor: COLORS.green,
-      color: COLORS.white,
-      '&:hover': {
-        backgroundColor: COLORS.green,
-    },
-  }})(Button);
+const useStyles = makeStyles({
+    budgetUsage: {
+        display: "flex",
+        justifyContent: "space-evenly",
+    }
+});
 
 export function BudgetSettingPopup(props: any) {
+const classes = useStyles();
+const coffeeSaveCalc: any  = (value: any) => {
+    if (value >= props.budget) {
+        return 0;
+    } else {
+        return (props.budget - value) / 2;
+    }
+}
 
 const handleDragChange: any = (value: any) => {
     console.log(value);
@@ -45,6 +45,7 @@ const handleDragChange: any = (value: any) => {
 const handleDragEnd: any = (value: any) => {
     console.log(value);
     setBudget(value);
+    setCoffee(coffeeSaveCalc(value));
  }
   
 const handleDragStart: any = (value: any) => {
@@ -55,9 +56,10 @@ const handleRenderValue: any = (value: any) => {
     return `${value.toFixed(2)}`;
  }
  const [budget, setBudget]: any = React.useState(props.budget);
+ const [coffee, setCoffee]: any = React.useState(props.coffee);
 const handlePopupClose: any = () => {
     props.handlePopupClose();
-    props.handleBudgetSetting(budget);
+    props.handleBudgetSetting(budget, coffee);
 }
   return (
     <div>
@@ -90,7 +92,29 @@ const handlePopupClose: any = () => {
                 end={20}
                 step={1}
             />
-          <StyledButton onClick={() => handlePopupClose()}>Set!</StyledButton>
+            <h2 style={{fontSize: "20px"}}>Equivalent to saving <p style={{color: COLORS.green, display: "inline"}}>{coffee}</p> coffees/week!</h2>
+            <div className={classes.budgetUsage}>
+            <Box sx={{color: COLORS.grayFont, fontFamily: "Futura, sans-serif", backgroundColor: COLORS.gray + "50", borderRadius: "20px"}}>
+                <h2 style={{fontWeight: "bold" }}>${12.00.toFixed(2)}</h2>
+                <p style={{alignSelf: "flex-end", fontWeight: "normal", marginLeft: "1rem"}}>Recommended</p>
+            </Box>
+            <Box sx={{color: COLORS.grayFont, fontFamily: "Futura, sans-serif", backgroundColor: COLORS.gray + "50", borderRadius: "20px"}}>
+                <h2 style={{ fontWeight: "bold" }}>${17.50.toFixed(2)}</h2>
+                <p style={{alignSelf: "flex-end", fontWeight: "normal", marginLeft: "1rem"}}>Area Average</p>
+            </Box>
+        </div>
+          <Button sx={{
+            float: "right",
+            borderRadius: "20px",
+            padding: "1rem",
+            fontSize: "24px",
+            fontFamily: "Futura, sans-serif",
+            fontWeight: "bold",
+            backgroundColor: COLORS.green,
+            color: COLORS.white,
+            '&:hover': {
+                backgroundColor: COLORS.green,
+            }}} onClick={() => handlePopupClose()}>Set!</Button>
         </Box>
     </div>
   );

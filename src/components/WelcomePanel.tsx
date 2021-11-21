@@ -39,7 +39,7 @@ export function WelcomePanel() {
         <div className={classes.root}>
             <h1 className={classes.greeting}>Hello Name!</h1>
             <div className={classes.description}>
-                <p>You are doing great this week, you saved ${`${currUtility.current}`} from last week, that's almost three coffees!</p>
+                <p>Your electricity usage seems a bit high! How about trying a recommendation?</p>
             </div>
         </div>
     )

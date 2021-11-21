@@ -26,7 +26,7 @@ function App() {
   return (
     <div className="App">
       <WelcomePanel />
-      <Grid container columnSpacing={1} alignItems="center" className={classes.dashboard}>
+      <Grid container alignItems="center" className={classes.dashboard}>
         <Grid item xs={9} md={9}><DonutPanel /></Grid>
         <Grid item xs={2} md={3}><ControlCenter /></Grid>
       </Grid>
