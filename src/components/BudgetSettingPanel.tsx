@@ -59,6 +59,10 @@ export function BudgetSettingPanel(props: any) {
     const handleOpen = () => setOpen(true);
     const handleClose = () => setOpen(false);
     const [budget, setBudget] = useState(12.00);
+    const handleBudgetSetting: any = (newBudget: any) => {
+        console.log("newBudget is: " + newBudget);
+        setBudget(newBudget);
+    }
     return (
         <div className={classes.root}>
             <h1 className={classes.greeting}>{props.uType + " Budget Limit"}</h1>
@@ -74,7 +78,7 @@ export function BudgetSettingPanel(props: any) {
                     aria-labelledby="modal-modal-title"
                     aria-describedby="modal-modal-description"
                 >
-                <BudgetSettingPopup budget={budget} handlePopupClose={handleClose}></BudgetSettingPopup>
+                <BudgetSettingPopup budget={budget} handlePopupClose={handleClose} handleBudgetSetting={(newBudget: any) => handleBudgetSetting(newBudget)}></BudgetSettingPopup>
                 </Modal>
             </div>
         </div>
