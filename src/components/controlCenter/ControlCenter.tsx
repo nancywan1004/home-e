@@ -10,12 +10,11 @@ import { TemperatureControl } from './TemperatureControl';
 
 const useStyles = makeStyles({
   root: {
-    margin: "auto auto 2rem auto",
-    marginLeft: 0,
+    margin: "auto auto auto 2rem",
     border: "0.1px solid transparent",
     borderRadius: "40px",
-    width: "25%",
-    height: "50%",
+    width: "100%",
+    height: "100%",
     backgroundColor: "#DEDEDE"
   },
   title: {

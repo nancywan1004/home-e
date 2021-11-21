@@ -2,6 +2,7 @@
 import React from 'react';
 import { Line } from 'react-chartjs-2';
 import { makeStyles } from '@material-ui/core/styles';
+import { Grid } from '@material-ui/core';
 import type { ChartProps } from 'react-chartjs-2';
 import { LineController, Chart } from 'chart.js';
 import { COLORS } from '../constants/Colors';

@@ -3,6 +3,7 @@ import { Connect } from 'aws-amplify-react';
 import { Route, Router } from 'react-router-dom';
 import { Link } from "react-router-dom";
 import { makeStyles } from '@material-ui/core/styles';
+import { Grid } from '@material-ui/core';
 
 import { WelcomePanel } from './components/WelcomePanel';
 import { DonutPanel } from './components/DonutPanel';
@@ -14,7 +15,8 @@ const useStyles = makeStyles({
   
   dashboard: {
     display: "flex",
-    flexDirection: "row"
+    flexDirection: "row",
+    justifyContent: "center"
   },
 });
 
@@ -24,10 +26,10 @@ function App() {
   return (
     <div className="App">
       <WelcomePanel />
-      <div className={classes.dashboard}>
-        <DonutPanel />
-        <ControlCenter />
-      </div>
+      <Grid container columnSpacing={1} alignItems="center" className={classes.dashboard}>
+        <Grid item xs={9} md={9}><DonutPanel /></Grid>
+        <Grid item xs={2} md={3}><ControlCenter /></Grid>
+      </Grid>
       {/* <Connect>
       </Connect> */}
       

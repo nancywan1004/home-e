@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Card, CardContent, Button, CardMedia, Typography, IconButton, Menu, MenuItem } from '@material-ui/core';
+import { Card, CardContent, Button, CardMedia, Grid, Typography, IconButton, Menu, MenuItem } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import { Outlet, Link } from "react-router-dom";
 
@@ -8,10 +8,10 @@ import { COLORS } from '../constants/Colors';
 
 const useStyles = makeStyles({
   root: {
-    marginBottom: "-3rem"
+    marginBottom: "-2rem"
   },
   remaining: {
-    marginTop: "-1rem"
+    marginTop: "-2rem"
   }
 });
 
@@ -23,18 +23,18 @@ export function DonutChart(props: any) {
         height = chart.height,
         ctx = chart.ctx;
         ctx.restore();
-        let fontSize = (height / 360).toFixed(2);
+        let fontSize = (height / 300).toFixed(2);
         ctx.font = fontSize + "rem Futura, sans-serif";
         ctx.textBaseline = "top";
-        let costText = "$" + props.cost,
+        let costText = "$" + props.cost.toFixed(2),
         costTextX = Math.round((width - ctx.measureText(costText).width) / 2),
-        costTextY = height / 1.8;
-        let remainingText = `$${props.target - props.cost < 0 ? 0 : props.target - props.cost} remaining`,
+        costTextY = height / 1.75;
+        let remainingText = `$${props.target - props.cost < 0 ? 0.00.toFixed(2) : (props.target - props.cost).toFixed(2)} remaining`,
         remainingTextX = Math.round((width - ctx.measureText(remainingText).width) / 2),
-        remainingTextY = height / 1.3;
+        remainingTextY = height / 1.25;
         let icon = new Image();
         icon.src = props.iconUrl;
-        ctx.drawImage(icon, width / 2.2, height / 2.35, width / 12, height / 10);
+        ctx.drawImage(icon, width / 2.25, height / 2.45, width / 10, height / 8);
         ctx.fillText(costText, costTextX, costTextY);
         ctx.fillText(remainingText, remainingTextX, remainingTextY);
         ctx.save();
@@ -65,7 +65,7 @@ export function DonutChart(props: any) {
         },
       },
       cutout: "75%",
-      radius: "40%",
+      radius: "50%",
       rotation: Math.PI * -0.5
     }
     return (

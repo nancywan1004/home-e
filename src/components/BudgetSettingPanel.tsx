@@ -1,6 +1,6 @@
 /* eslint:disable */
 import React, { useState, useRef } from 'react';
-import { Card, CardContent, Button, CardMedia, Typography, IconButton, Menu, MenuItem, Modal, Box } from '@material-ui/core';
+import { Card, CardContent, Button, Grid, CardMedia, Typography, IconButton, Menu, MenuItem, Modal, Box } from '@material-ui/core';
 import { makeStyles, withStyles } from '@material-ui/core/styles';
 import { COLORS } from '../constants/Colors';
 import { BudgetSettingPopup } from './BudgetSettingPopup';
@@ -21,11 +21,11 @@ const useStyles = makeStyles({
         marginTop: "-0.5rem"
     },
     description: {
-        marginTop: "-2rem",
+        //marginTop: "-2rem",
         display: "flex",
-        justifyContent: 'flex-end',
+        justifyContent: 'center',
         width: "60%",
-        textAlign: "left",
+        //textAlign: "left",
         fontSize: "36px",
         fontFamily: "Futura, sans-serif",
         fontWeight: "normal"
@@ -41,8 +41,9 @@ const useStyles = makeStyles({
 
 const StyledButton = withStyles({
     root: {
+      margin: "auto auto auto 4rem",
       borderRadius: "20px",
-      padding: "-1rem 1rem -1rem 1rem",
+      padding: "1rem 1rem 1rem 1rem",
       fontSize: "24px",
       fontFamily: "Futura, sans-serif",
       fontWeight: "bold",
@@ -66,11 +67,15 @@ export function BudgetSettingPanel(props: any) {
     return (
         <div className={classes.root}>
             <h1 className={classes.greeting}>{props.uType + " Budget Limit"}</h1>
-            <div className={classes.budgetBody}>
-                <div className={classes.description}>
-                    <h2 style={{color: COLORS.green}}>$ {budget.toFixed(2)}</h2>
-                    <p style={{alignSelf: 'flex-end', color: COLORS.grayFont}}>/week</p>
-                </div>
+            <Grid container spacing={2} alignItems="center" justifyContent="center">
+                <Grid item xs={6} md={5} className={classes.description}>
+                    <h2 style={{color: COLORS.green}}>${budget.toFixed(2)}</h2>
+                    <p style={{alignSelf: "flex-end", color: COLORS.grayFont}}>/week</p>
+                </Grid>
+                {/* <Grid item xs={2} md={2} sx={{color: COLORS.grayFont}}>
+                    
+                </Grid> */}
+                <Grid item xs={3} md={4}>
                 <StyledButton onClick={() => handleOpen()}>Change</StyledButton>
                 <Modal
                     open={open}
@@ -80,7 +85,8 @@ export function BudgetSettingPanel(props: any) {
                 >
                 <BudgetSettingPopup budget={budget} handlePopupClose={handleClose} handleBudgetSetting={(newBudget: any) => handleBudgetSetting(newBudget)}></BudgetSettingPopup>
                 </Modal>
-            </div>
+                </Grid>
+            </Grid>
         </div>
     )
 }
