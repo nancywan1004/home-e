@@ -27,7 +27,7 @@ function App() {
     <div className="App">
       <WelcomePanel />
       <Grid container alignItems="center" className={classes.dashboard}>
-        <Grid item xs={9} md={9}><DonutPanel /></Grid>
+        <Grid item xs={9} md={8}><DonutPanel /></Grid>
         <Grid item xs={2} md={3}><ControlCenter /></Grid>
       </Grid>
       {/* <Connect>
