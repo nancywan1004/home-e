@@ -126,46 +126,104 @@ To get a local copy up and running, please follow these simple steps below.
 The utility rings were drawn based on the DonutChart of Chartjs, while requiring extra plugin and option configurations to customize the default chart(e.g. display the texts inside the circle). 
 
 Here's the sample code in `src/components/DonutChart.tsx`
+<table>
+<tr>
+<th>Plugins</th>
+<th>Options</th>
+</tr>
+<tr>
+<td>
+```js
+    const plugins: any = [{
+      beforeDraw: function(chart: any) {
+        let width = chart.width,
+        height = chart.height,
+        ctx = chart.ctx;
+        ctx.restore();
+        let fontSize = (height / 300).toFixed(2);
+        ctx.font = fontSize + "rem Futura, sans-serif";
+        ctx.textBaseline = "top";
+        let costText = "$" + props.cost.toFixed(2),
+        costTextX = Math.round((width - ctx.measureText(costText).width) / 2),
+        costTextY = height / 1.75;
+        let remainingText = `$${props.target - props.cost < 0 ? 0.00.toFixed(2) : (props.target - props.cost).toFixed(2)} remaining`,
+        remainingTextX = Math.round((width - ctx.measureText(remainingText).width) / 2),
+        remainingTextY = height / 1.25;
+        let icon = new Image();
+        icon.src = props.iconUrl;
+        ctx.drawImage(icon, width / 2.25, height / 2.45, width / 10, height / 8);
+        ctx.fillText(costText, costTextX, costTextY);
+        ctx.fillText(remainingText, remainingTextX, remainingTextY);
+        ctx.save();
+      },
+      beforeInit: (chart: any) => {
+        const dataset = chart.data.datasets[0];
+        chart.data.labels = [dataset.label];
+        dataset.data = [dataset.percent, 100 - dataset.percent < 0 ? 0 : 100 - dataset.percent];
+      }
+    }]
+```
+</td>
+<td>
+
+```js
+    const options: any = {
+      plugins: {
+        legend: {
+          display: false
+        },
+        tooltip: {
+          filter: function(tooltipItem: any) {
+            return !!tooltipItem.label;
+          },
+          callbacks: {
+            label: function(chart: any) {
+              var dataset = chart.dataset;
+              var currentValue = dataset.data[chart.datasetIndex];
+              return currentValue + '%';
+            }
+          }
+        },
+      },
+      cutout: "75%",
+      radius: "50%",
+      rotation: Math.PI * -0.5
+    }
+```
+
+</td>
+</tr>
+</table>
+
 ```js
 <Doughnut data={props.utilityData} width={100} height={100} options={options} plugins={plugins}/>
 ```
+
+For more information on the rendering pipeline of the plugins, please refer to [Rendering Documentations](https://www.chartjs.org/docs/latest/developers/plugins.html#rendering).  
 
 #### Shaded Area
 The shaded area under each ring indicating the weekly utility trend was created based on LineChart of Chartjs. One big challenge of using the AreaChart directly was to fill the area while retaining the round corner of the card container. This would then require a workaround using the native Canvas [`arcTo() method`](https://www.w3schools.com/tags/canvas_arcto.asp) for articulated area calculations. The drawing time of this shaded area occurs at the `beforeDraw` stage. 
 
 Here's the sample code in `src/components/AreaChart.tsx`:
 ```js
-    const plugins: any = [{
-        beforeDraw: function(chart: any) {
-          let width = chart.width,
-          height = chart.height,
-          ctx = chart.ctx;
-          let meta = chart.getDatasetMeta(0);
-          let lastWeekDatapoint = meta.data[0];
-          let thisWeekDatapoint = meta.data[1];
-          ctx.restore();
-          ctx.beginPath();
-          ctx.moveTo(lastWeekDatapoint.x - 0.05 * width, lastWeekDatapoint.y);           // Create a starting point
-          if (lastWeekDatapoint.y <= thisWeekDatapoint.y) {
-            ctx.lineTo(lastWeekDatapoint.x - 0.05 * width, lastWeekDatapoint.y + height * 0.35);          // Create a vertical line
-            ctx.arcTo(lastWeekDatapoint.x - 0.05 * width, lastWeekDatapoint.y + height, lastWeekDatapoint.x + width * 0.3, lastWeekDatapoint.y + height, 60); // Create an arc
-            ctx.lineTo(lastWeekDatapoint.x + width * 0.5, lastWeekDatapoint.y + height);         // Continue with horizontal line
-            ctx.arcTo(lastWeekDatapoint.x + width, lastWeekDatapoint.y + height, lastWeekDatapoint.x + width, lastWeekDatapoint.y + height * 0.35, 55);
-          } else {
-            ctx.lineTo(lastWeekDatapoint.x - 0.05 * width, lastWeekDatapoint.y + height * 0.35);          // Create a vertical line
-            ctx.arcTo(lastWeekDatapoint.x - 0.05 * width, lastWeekDatapoint.y + height * 0.9, lastWeekDatapoint.x + width * 0.5, lastWeekDatapoint.y + height * 0.9, 80); // Create an arc
-            ctx.lineTo(lastWeekDatapoint.x + width * 0.5, lastWeekDatapoint.y + height * 0.9);         // Continue with horizontal line
-            ctx.arcTo(lastWeekDatapoint.x + width, lastWeekDatapoint.y + height * 0.9, lastWeekDatapoint.x + width, lastWeekDatapoint.y + height * 0.35, 70);
-          }
-          ctx.lineTo(lastWeekDatapoint.x + width, thisWeekDatapoint.y);
-          ctx.fillStyle = fillColor(lastWeekDatapoint, thisWeekDatapoint) + "40";
-          ctx.fill();
-          ctx.save();
-        },
-      }]
+        ctx.beginPath();
+        ctx.moveTo(lastWeekDatapoint.x - 0.05 * width, lastWeekDatapoint.y);           // Create a starting point
+        if (lastWeekDatapoint.y <= thisWeekDatapoint.y) {
+          ctx.lineTo(lastWeekDatapoint.x - 0.05 * width, lastWeekDatapoint.y + height * 0.35);          // Create a vertical line
+          ctx.arcTo(lastWeekDatapoint.x - 0.05 * width, lastWeekDatapoint.y + height, lastWeekDatapoint.x + width * 0.3, lastWeekDatapoint.y + height, 60); // Create an arc
+          ctx.lineTo(lastWeekDatapoint.x + width * 0.5, lastWeekDatapoint.y + height);         // Continue with horizontal line
+          ctx.arcTo(lastWeekDatapoint.x + width, lastWeekDatapoint.y + height, lastWeekDatapoint.x + width, lastWeekDatapoint.y + height * 0.35, 55);
+        } else {
+          ctx.lineTo(lastWeekDatapoint.x - 0.05 * width, lastWeekDatapoint.y + height * 0.35);          // Create a vertical line
+          ctx.arcTo(lastWeekDatapoint.x - 0.05 * width, lastWeekDatapoint.y + height * 0.9, lastWeekDatapoint.x + width * 0.5, lastWeekDatapoint.y + height * 0.9, 80); // Create an arc
+          ctx.lineTo(lastWeekDatapoint.x + width * 0.5, lastWeekDatapoint.y + height * 0.9);         // Continue with horizontal line
+          ctx.arcTo(lastWeekDatapoint.x + width, lastWeekDatapoint.y + height * 0.9, lastWeekDatapoint.x + width, lastWeekDatapoint.y + height * 0.35, 70);
+        }
+        ctx.lineTo(lastWeekDatapoint.x + width, thisWeekDatapoint.y);
+        ctx.fillStyle = fillColor(lastWeekDatapoint, thisWeekDatapoint) + "40";
+        ctx.fill();
+        ctx.save();
 ```
-
-For more information on the rendering pipeline of the plugins, please refer to [Rendering Documentations](https://www.chartjs.org/docs/latest/developers/plugins.html#rendering).
 
 #### Bar Chart
 The bar charts on the three subpages were built upon the BarChart of Chartjs. In order to incorporate this week and last week's data, two x axes were needed, thus requiring xAxisID to be specified. This would allow the chart renderer to know which axis to plot this dataset on, and add customized styling accordingly.
