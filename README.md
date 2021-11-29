@@ -125,6 +125,7 @@ To get a local copy up and running, please follow these simple steps below.
 #### Rings
 The utility rings were drawn based on the DonutChart of Chartjs, while requiring extra plugin and option configurations to customize the default chart(e.g. display the texts inside the circle). 
 
+Here's the sample code in `src/components/DonutChart.tsx`
 ```js
 <Doughnut data={props.utilityData} width={100} height={100} options={options} plugins={plugins}/>
 ```
@@ -132,7 +133,7 @@ The utility rings were drawn based on the DonutChart of Chartjs, while requiring
 #### Shaded Area
 The shaded area under each ring indicating the weekly utility trend was created based on LineChart of Chartjs. One big challenge of using the AreaChart directly was to fill the area while retaining the round corner of the card container. This would then require a workaround using the native Canvas [`arcTo() method`](https://www.w3schools.com/tags/canvas_arcto.asp) for articulated area calculations. The drawing time of this shaded area occurs at the `beforeDraw` stage. 
 
-Here's the sample code:
+Here's the sample code in `src/components/AreaChart.tsx`:
 ```js
     const plugins: any = [{
         beforeDraw: function(chart: any) {
@@ -169,7 +170,17 @@ For more information on the rendering pipeline of the plugins, please refer to [
 #### Bar Chart
 The bar charts on the three subpages were built upon the BarChart of Chartjs. In order to incorporate this week and last week's data, two x axes were needed, thus requiring xAxisID to be specified. This would allow the chart renderer to know which axis to plot this dataset on, and add customized styling accordingly.
 
-The daily/weekly/monthly tabs were implemented witth the [`Tabs API`](https://mui.com/components/tabs/#main-content) of the material-ui library.
+In addition, the daily/weekly/monthly tabs were then implemented with the [`Tabs API`](https://mui.com/components/tabs/#main-content) of the material-ui library.
+
+Here's the sample code in `src/components/BarChart.tsx`:
+```js
+        <Tabs value={data}  onChange={handleChange} className={classes.timeTabs} TabIndicatorProps={{style: {display: "none"}}}>
+            <Tab className={classes.timeTab} value={dailyData} label="Day" />
+            <Tab className={classes.timeTab} value={weeklyData} label="Week" />
+            <Tab className={classes.timeTab} value={monthlyData} label="Month" />
+        </Tabs>
+        <Bar data={data} options={options} plugins={[ChartDataLabels] as any} ref={barChart}/>
+```
 
 **Note:** For more troubleshooting on the Chartjs API, please refer to [3.x.x Migration Documentation](https://www.chartjs.org/docs/3.2.1/getting-started/v3-migration.html).
 
@@ -180,17 +191,17 @@ The daily/weekly/monthly tabs were implemented witth the [`Tabs API`](https://mu
 <!-- ROADMAP -->
 ## Roadmap
 
-- [ ] Dashboard
-  - [x] Welcome board
-  - [x] Rings
-  - [x] Control Center
+- [ ] Dashboard (`src/App.tsx`)
+  - [x] Welcome board (`src/components/WelcomePanel.tsx`)
+  - [x] Rings (`src/components/DonutPanel.tsx`)
+  - [x] Control Center (`src/components/controlCener/*`)
   - [ ] Achievement System(TODO) 
-- [ ] Subpage
-  - [x] Utility trend bar chart(daily/weekly/monthly)
-  - [x] Budget setting panel
-  - [x] Budget setting popup
-  - [x] Bottom Navigation
-  - [ ] Recommendation carousels(TODO) 
+- [ ] Subpage (`src/components/UtilitiesPage.tsx`)
+  - [x] Utility trend bar chart(daily/weekly/monthly) (`src/components/BarChart.tsx`)
+  - [x] Budget setting panel (`src/components/BudgetSettingPanel.tsx`)
+  - [x] Budget setting popup (`src/components/BudgetSettingPopup.tsx`)
+  - [x] Bottom Navigation (`src/components/RecommendationPanel.tsx`)
+  - [ ] Recommendation carousels(Doing) (`src/components/RecommendationPanel.tsx`)
 
 See the [open issues](https://github.com/nancywan1004/home-e/issues) for a full list of proposed features (and known issues).
 
