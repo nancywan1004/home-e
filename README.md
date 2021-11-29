@@ -16,7 +16,7 @@
 
 <div align="center">
   <a href="https://github.com/nancywan1004/home-e">
-    <img src="public/images/HomeE_logo.png" alt="Logo" width="80" height="40">
+    <img src="public/images/HomeE_logo.png" alt="Logo" width="80" height="30">
   </a>
 
 <h3 align="center">HomeE</h3>
@@ -75,6 +75,7 @@ HomeE, is a smart home system that could be integrated into smart home devices l
 Front End
 * [React.js 17.0.2](https://reactjs.org/)
 * [Chart.js 3.6.0](https://www.chartjs.org/docs/latest/)
+* [Material-UI 5.0.6](https://mui.com/)
 
 Back End(NOT doing but already setup)
 * [AWS AppSync](https://aws.amazon.com/appsync/)
@@ -129,7 +130,7 @@ The utility rings were drawn based on the DonutChart of Chartjs, while requiring
 ```
 
 #### Shaded Area
-The shaded area under each ring indicating the weekly utility trend was created based on LineChart of Chartjs. One big challenge of using the AreaChart directly was to fill the area while retaining the round corner of the card container. This would then require a workaround using the native Canvas `arcTo()` [method](https://www.w3schools.com/tags/canvas_arcto.asp) for articulated area calculations. The drawing time of this shaded area occurs at the `beforeDraw` stage. 
+The shaded area under each ring indicating the weekly utility trend was created based on LineChart of Chartjs. One big challenge of using the AreaChart directly was to fill the area while retaining the round corner of the card container. This would then require a workaround using the native Canvas [`arcTo() method`](https://www.w3schools.com/tags/canvas_arcto.asp) for articulated area calculations. The drawing time of this shaded area occurs at the `beforeDraw` stage. 
 
 Here's the sample code:
 ```js
@@ -166,7 +167,9 @@ Here's the sample code:
 For more information on the rendering pipeline of the plugins, please refer to [Rendering Documentations](https://www.chartjs.org/docs/latest/developers/plugins.html#rendering).
 
 #### Bar Chart
+The bar charts on the three subpages were built upon the BarChart of Chartjs. In order to incorporate this week and last week's data, two x axes were needed, thus requiring xAxisID to be specified. This would allow the chart renderer to know which axis to plot this dataset on, and add customized styling accordingly.
 
+The daily/weekly/monthly tabs were implemented witth the [`Tabs API`](https://mui.com/components/tabs/#main-content) of the material-ui library.
 
 **Note:** For more troubleshooting on the Chartjs API, please refer to [3.x.x Migration Documentation](https://www.chartjs.org/docs/3.2.1/getting-started/v3-migration.html).
 
