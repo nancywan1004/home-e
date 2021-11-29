@@ -201,10 +201,8 @@ Here's the sample code in `src/components/DonutChart.tsx`
 <Doughnut data={props.utilityData} width={100} height={100} options={options} plugins={plugins}/>
 ```
 
-For more information on the rendering pipeline of the plugins, please refer to [Rendering Documentations](https://www.chartjs.org/docs/latest/developers/plugins.html#rendering).  
-
 #### Shaded Area
-The shaded area under each ring indicating the weekly utility trend was created based on LineChart of Chartjs. One big challenge of using the AreaChart directly was to fill the area while retaining the round corner of the card container. This would then require a workaround using the native Canvas [`arcTo() method`](https://www.w3schools.com/tags/canvas_arcto.asp) for articulated area calculations. The drawing time of this shaded area occurs at the `beforeDraw` stage. 
+The shaded area under each ring indicating the weekly utility trend was created based on LineChart of Chartjs. One big challenge of using the AreaChart directly was to fill the area while retaining the round corner of the card container. This would then require a workaround using the native Canvas [`arcTo() method`](https://www.w3schools.com/tags/canvas_arcto.asp) for articulated area calculations. The drawing time of this shaded area occurs at the `beforeDraw` stage. For more information on the rendering pipeline of the plugins, please refer to [Rendering Documentations](https://www.chartjs.org/docs/latest/developers/plugins.html#rendering).  
 
 Here's the sample code in `src/components/AreaChart.tsx`:
 ```js
