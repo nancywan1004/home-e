@@ -133,6 +133,7 @@ Here's the sample code in `src/components/DonutChart.tsx`
 </tr>
 <tr>
 <td>
+
 ```js
     const plugins: any = [{
       beforeDraw: function(chart: any) {
@@ -163,6 +164,7 @@ Here's the sample code in `src/components/DonutChart.tsx`
       }
     }]
 ```
+                                                                                                                                   
 </td>
 <td>
 
@@ -206,23 +208,34 @@ The shaded area under each ring indicating the weekly utility trend was created 
 
 Here's the sample code in `src/components/AreaChart.tsx`:
 ```js
-        ctx.beginPath();
-        ctx.moveTo(lastWeekDatapoint.x - 0.05 * width, lastWeekDatapoint.y);           // Create a starting point
-        if (lastWeekDatapoint.y <= thisWeekDatapoint.y) {
-          ctx.lineTo(lastWeekDatapoint.x - 0.05 * width, lastWeekDatapoint.y + height * 0.35);          // Create a vertical line
-          ctx.arcTo(lastWeekDatapoint.x - 0.05 * width, lastWeekDatapoint.y + height, lastWeekDatapoint.x + width * 0.3, lastWeekDatapoint.y + height, 60); // Create an arc
-          ctx.lineTo(lastWeekDatapoint.x + width * 0.5, lastWeekDatapoint.y + height);         // Continue with horizontal line
-          ctx.arcTo(lastWeekDatapoint.x + width, lastWeekDatapoint.y + height, lastWeekDatapoint.x + width, lastWeekDatapoint.y + height * 0.35, 55);
-        } else {
-          ctx.lineTo(lastWeekDatapoint.x - 0.05 * width, lastWeekDatapoint.y + height * 0.35);          // Create a vertical line
-          ctx.arcTo(lastWeekDatapoint.x - 0.05 * width, lastWeekDatapoint.y + height * 0.9, lastWeekDatapoint.x + width * 0.5, lastWeekDatapoint.y + height * 0.9, 80); // Create an arc
-          ctx.lineTo(lastWeekDatapoint.x + width * 0.5, lastWeekDatapoint.y + height * 0.9);         // Continue with horizontal line
-          ctx.arcTo(lastWeekDatapoint.x + width, lastWeekDatapoint.y + height * 0.9, lastWeekDatapoint.x + width, lastWeekDatapoint.y + height * 0.35, 70);
-        }
-        ctx.lineTo(lastWeekDatapoint.x + width, thisWeekDatapoint.y);
-        ctx.fillStyle = fillColor(lastWeekDatapoint, thisWeekDatapoint) + "40";
-        ctx.fill();
-        ctx.save();
+    const plugins: any = [{
+        beforeDraw: function(chart: any) {
+          let width = chart.width,
+          height = chart.height,
+          ctx = chart.ctx;
+          let meta = chart.getDatasetMeta(0);
+          let lastWeekDatapoint = meta.data[0];
+          let thisWeekDatapoint = meta.data[1];
+          ctx.restore();
+          ctx.beginPath();
+          ctx.moveTo(lastWeekDatapoint.x - 0.05 * width, lastWeekDatapoint.y);           // Create a starting point
+          if (lastWeekDatapoint.y <= thisWeekDatapoint.y) {
+            ctx.lineTo(lastWeekDatapoint.x - 0.05 * width, lastWeekDatapoint.y + height * 0.35);          // Create a horizontal line
+            ctx.arcTo(lastWeekDatapoint.x - 0.05 * width, lastWeekDatapoint.y + height, lastWeekDatapoint.x + width * 0.3, lastWeekDatapoint.y + height, 60); // Create an arc
+            ctx.lineTo(lastWeekDatapoint.x + width * 0.5, lastWeekDatapoint.y + height);         // Continue with vertical line
+            ctx.arcTo(lastWeekDatapoint.x + width, lastWeekDatapoint.y + height, lastWeekDatapoint.x + width, lastWeekDatapoint.y + height * 0.35, 55);
+          } else {
+            ctx.lineTo(lastWeekDatapoint.x - 0.05 * width, lastWeekDatapoint.y + height * 0.35);          // Create a horizontal line
+            ctx.arcTo(lastWeekDatapoint.x - 0.05 * width, lastWeekDatapoint.y + height * 0.9, lastWeekDatapoint.x + width * 0.5, lastWeekDatapoint.y + height * 0.9, 80); // Create an arc
+            ctx.lineTo(lastWeekDatapoint.x + width * 0.5, lastWeekDatapoint.y + height * 0.9);         // Continue with vertical line
+            ctx.arcTo(lastWeekDatapoint.x + width, lastWeekDatapoint.y + height * 0.9, lastWeekDatapoint.x + width, lastWeekDatapoint.y + height * 0.35, 70);
+          }
+          ctx.lineTo(lastWeekDatapoint.x + width, thisWeekDatapoint.y);
+          ctx.fillStyle = fillColor(lastWeekDatapoint, thisWeekDatapoint) + "40";
+          ctx.fill();
+          ctx.save();
+        },
+      }]
 ```
 
 #### Bar Chart
