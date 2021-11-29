@@ -16,7 +16,7 @@
 
 <div align="center">
   <a href="https://github.com/nancywan1004/home-e">
-    <img src="images/HomeE_logo.png" alt="Logo" width="80" height="80">
+    <img src="public/images/HomeE_logo.png" alt="Logo" width="80" height="80">
   </a>
 
 <h3 align="center">HomeE</h3>
@@ -93,7 +93,6 @@ To get a local copy up and running, please follow these simple steps below.
 
 ### Prerequisites
 
-This is an example of how to list things you need to use the software and how to install them.
 * npm
   ```sh
   npm install npm@latest -g
@@ -121,9 +120,55 @@ This is an example of how to list things you need to use the software and how to
 <!-- USAGE EXAMPLES -->
 ## Usage
 
-Use this space to show useful examples of how a project can be used. Additional screenshots, code examples and demos work well in this space. You may also link to more resources.
+### Chart Drawing with Chartjs API
+#### Rings
+The utility rings were drawn based on the DonutChart of Chartjs, while requiring extra plugin and option configurations to customize the default chart(e.g. display the texts inside the circle). 
 
-_For more examples, please refer to the [Documentation](https://example.com)_
+```js
+<Doughnut data={props.utilityData} width={100} height={100} options={options} plugins={plugins}/>
+```
+
+#### Shaded Area
+The shaded area under each ring indicating the weekly utility trend was created based on LineChart of Chartjs. One big challenge of using the AreaChart directly was to fill the area while retaining the round corner of the card container. This would then require a workaround using the native Canvas `arcTo()` [method](https://www.w3schools.com/tags/canvas_arcto.asp) for articulated area calculations. The drawing time of this shaded area occurs at the `beforeDraw` stage. 
+
+Here's the sample code:
+```js
+    const plugins: any = [{
+        beforeDraw: function(chart: any) {
+          let width = chart.width,
+          height = chart.height,
+          ctx = chart.ctx;
+          let meta = chart.getDatasetMeta(0);
+          let lastWeekDatapoint = meta.data[0];
+          let thisWeekDatapoint = meta.data[1];
+          ctx.restore();
+          ctx.beginPath();
+          ctx.moveTo(lastWeekDatapoint.x - 0.05 * width, lastWeekDatapoint.y);           // Create a starting point
+          if (lastWeekDatapoint.y <= thisWeekDatapoint.y) {
+            ctx.lineTo(lastWeekDatapoint.x - 0.05 * width, lastWeekDatapoint.y + height * 0.35);          // Create a vertical line
+            ctx.arcTo(lastWeekDatapoint.x - 0.05 * width, lastWeekDatapoint.y + height, lastWeekDatapoint.x + width * 0.3, lastWeekDatapoint.y + height, 60); // Create an arc
+            ctx.lineTo(lastWeekDatapoint.x + width * 0.5, lastWeekDatapoint.y + height);         // Continue with horizontal line
+            ctx.arcTo(lastWeekDatapoint.x + width, lastWeekDatapoint.y + height, lastWeekDatapoint.x + width, lastWeekDatapoint.y + height * 0.35, 55);
+          } else {
+            ctx.lineTo(lastWeekDatapoint.x - 0.05 * width, lastWeekDatapoint.y + height * 0.35);          // Create a vertical line
+            ctx.arcTo(lastWeekDatapoint.x - 0.05 * width, lastWeekDatapoint.y + height * 0.9, lastWeekDatapoint.x + width * 0.5, lastWeekDatapoint.y + height * 0.9, 80); // Create an arc
+            ctx.lineTo(lastWeekDatapoint.x + width * 0.5, lastWeekDatapoint.y + height * 0.9);         // Continue with horizontal line
+            ctx.arcTo(lastWeekDatapoint.x + width, lastWeekDatapoint.y + height * 0.9, lastWeekDatapoint.x + width, lastWeekDatapoint.y + height * 0.35, 70);
+          }
+          ctx.lineTo(lastWeekDatapoint.x + width, thisWeekDatapoint.y);
+          ctx.fillStyle = fillColor(lastWeekDatapoint, thisWeekDatapoint) + "40";
+          ctx.fill();
+          ctx.save();
+        },
+      }]
+```
+
+For more information on the rendering pipeline of the plugins, please refer to [Rendering Documentations](https://www.chartjs.org/docs/latest/developers/plugins.html#rendering).
+
+#### Bar Chart
+
+
+**Note:** For more troubleshooting on the Chartjs API, please refer to [3.x.x Migration Documentation](https://www.chartjs.org/docs/3.2.1/getting-started/v3-migration.html).
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
@@ -132,16 +177,17 @@ _For more examples, please refer to the [Documentation](https://example.com)_
 <!-- ROADMAP -->
 ## Roadmap
 
-- [] Dashboard
-  - [] Welcome board
-  - [] Rings
-  - [] Control Center
-  - [] Achievement System(TODO) 
-- [] Subpage
-  - [] Utility trend bar chart(daily/weekly/monthly)
-  - [] Budget setting panel
-  - [] Budget setting popup
-  - [] Recommendation carousels(TODO) 
+- [ ] Dashboard
+  - [x] Welcome board
+  - [x] Rings
+  - [x] Control Center
+  - [ ] Achievement System(TODO) 
+- [ ] Subpage
+  - [x] Utility trend bar chart(daily/weekly/monthly)
+  - [x] Budget setting panel
+  - [x] Budget setting popup
+  - [x] Bottom Navigation
+  - [ ] Recommendation carousels(TODO) 
 
 See the [open issues](https://github.com/nancywan1004/home-e/issues) for a full list of proposed features (and known issues).
 
