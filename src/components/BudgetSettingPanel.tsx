@@ -9,13 +9,14 @@ const useStyles = makeStyles({
     root: {
         margin: "2rem auto auto 2rem",
         backgroundColor: COLORS.whiteBackground,
-        width: "40%",
+        //width: "60%",
         border: "0.1px solid #70707020",
         borderRadius: "20px",
-        padding: "1.5rem 3.5rem 1.5rem 1.5rem"
+        padding: "1.5rem 1.5rem 1.5rem 1.5rem"
     },
     greeting: {
-        fontFamily: "utopia-std, serif",
+        fontFamily: "Futura, sans-serif",
+        color: COLORS.grayFont,
         fontWeight: "bold",
         textAlign: "left",
         marginTop: "-0.5rem"
@@ -78,9 +79,6 @@ export function BudgetSettingPanel(props: any) {
                     <h2 style={{color: COLORS.green}}>${budget.toFixed(2)}</h2>
                     <p style={{alignSelf: "flex-end", color: COLORS.grayFont}}>/week</p>
                 </Grid>
-                {/* <Grid item xs={2} md={2} sx={{color: COLORS.grayFont}}>
-                    
-                </Grid> */}
                 <Grid item xs={3} md={4}>
                 <StyledButton onClick={() => handleOpen()}>Change</StyledButton>
                 <Modal

@@ -11,7 +11,9 @@ export const COLORS = {
     gray: "#737373",
     grayFont: "#646464",
     grayIcon: "#BEBEBE",
+    grayBackground: "DEDEDE",
     darkBlue: "#022859",
+    blueFont: "#E2F7F8"
 
 
 }
