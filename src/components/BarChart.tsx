@@ -115,7 +115,7 @@ const monthlyData: any = {
             backgroundColor: COLORS.darkBlue,
             barPercentage: 0.7,
             xAxisID: "x1",
-                        datalabels: {
+            datalabels: {
                 anchor: "end",
                 align: "end",
                 color: COLORS.darkBlue,
