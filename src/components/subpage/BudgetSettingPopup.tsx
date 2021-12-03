@@ -31,10 +31,10 @@ export function BudgetSettingPopup(props: any) {
     const classes = useStyles();
     const coffeeSaveCalc: any = (value: any) => {
         console.log(value);
-        if (value >= 12) {
+        if (value >= props.budget) {
             return 0;
         } else {
-            return (12 - value) / 2;
+            return (props.budget - value) / 2;
         }
     }
 
@@ -45,14 +45,8 @@ export function BudgetSettingPopup(props: any) {
 
     const handleDragEnd: any = (value: any) => {
         console.log(value);
-        setBudget(value);
+        setBudget(value.toFixed(2));
         setCoffee(coffeeSaveCalc(value));
-    }
-
-    const onChanged: any = (value: any) => {
-        console.log(value);
-        setBudget(value);
-        
     }
 
     const handleDragStart: any = (value: any) => {
@@ -85,7 +79,7 @@ export function BudgetSettingPopup(props: any) {
                         fontWeight: "bold",
                         color: COLORS.green
                     }}>
-                        ${budget.toFixed(2)}
+                        ${budget}
                     </Typography>
                     <Typography id="modal-modal-description" sx={{ alignSelf: "flex-end" }}>/week</Typography>
                 </div>

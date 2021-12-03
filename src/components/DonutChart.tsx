@@ -66,7 +66,6 @@ export function DonutChart(props: any) {
       },
       cutout: "75%",
       radius: "50%",
-      rotation: Math.PI * -0.5
     }
     return (
         <div className={classes.root}>

@@ -1,5 +1,5 @@
 /* eslint:disable */
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { Card, CardContent, Button, Grid, CardMedia, Typography, IconButton, Menu, MenuItem, Modal, Box } from '@material-ui/core';
 import { makeStyles, withStyles } from '@material-ui/core/styles';
 import { COLORS } from '../../constants/Colors';
@@ -59,24 +59,43 @@ const StyledButton = withStyles({
     },
   }})(Button);
 
+const utilityBudget: any[] = [
+    {
+        type: "ELECTRICITY",
+        budget: 17.50
+    },
+    {
+        type: "WATER",
+        budget: 14.00
+    },
+    {
+        type: "GAS",
+        budget: 12.00
+    }
+]
+
 export function BudgetSettingPanel(props: any) {
     const classes = useStyles();
     const [open, setOpen] = useState(false);
     const handleOpen = () => setOpen(true);
     const handleClose = () => setOpen(false);
-    const [budget, setBudget] = useState(12.00);
+    const [budget, setBudget] = useState(null);
     const [coffee, setCoffee] = useState(0.00);
     const handleBudgetSetting: any = (newBudget: any, newCoffee: any) => {
         console.log("newCoffee is: " + newCoffee);
         setBudget(newBudget);
         setCoffee(newCoffee);
     }
+    useEffect(() => {
+        let utilityObj: any = utilityBudget.find((elem) => elem.type === props.uType);
+        setBudget(utilityObj?.budget.toFixed(2));
+    }, [props.uType])
     return (
         <div className={classes.root}>
             <h1 className={classes.greeting}>{props.uType + " Budget Limit"}</h1>
             <Grid container spacing={2} alignItems="center" justifyContent="center">
                 <Grid item xs={6} md={5} className={classes.description}>
-                    <h2 style={{color: COLORS.green}}>${budget.toFixed(2)}</h2>
+                    <h2 style={{color: COLORS.green}}>${budget}</h2>
                     <p style={{alignSelf: "flex-end", color: COLORS.grayFont}}>/week</p>
                 </Grid>
                 <Grid item xs={3} md={4}>

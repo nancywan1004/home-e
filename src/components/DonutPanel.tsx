@@ -112,7 +112,7 @@ const utilityData: any[] = [
               {
                 label: 'Current Gas Percentage',
                 percent: 70,
-                backgroundColor: [COLORS.yellow, COLORS.white]
+                backgroundColor: [COLORS.yellow, COLORS.white],
               },
             ],
           },
