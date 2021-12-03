@@ -270,17 +270,17 @@ Here's the sample code in `src/components/subpage/BarChart.tsx`:
 <!-- ROADMAP -->
 ## Roadmap
 
-- [ ] Dashboard (`src/App.tsx`)
+- [x] Dashboard (`src/App.tsx`)
   - [x] Welcome board (`src/components/WelcomePanel.tsx`)
   - [x] Rings (`src/components/DonutPanel.tsx`)
   - [x] Control Center (`src/components/controlCener/*`)
-  - [ ] Achievement System(TODO) 
-- [ ] Subpage (`src/components/subpage`)
+  - [x] Achievement System (`src/components/AchievementPanel.tsx`)
+- [x] Subpage (`src/components/subpage`)
   - [x] Utility trend bar chart(daily/weekly/monthly) (`src/components/subpage/BarChart.tsx`)
   - [x] Budget setting panel (`src/components/subpage/BudgetSettingPanel.tsx`)
   - [x] Budget setting popup (`src/components/subpage/BudgetSettingPopup.tsx`)
   - [x] Bottom Navigation (`src/components/subpage/RecommendationPanel.tsx`)
-  - [ ] Recommendation carousels(Doing) (`src/components/subpage/RecommendationPanel.tsx`)
+  - [x] Recommendation carousels (`src/components/subpage/RecommendationPanel.tsx`)
 
 See the [open issues](https://github.com/nancywan1004/home-e/issues) for a full list of proposed features (and known issues).
 
@@ -318,8 +318,8 @@ Distributed under the MIT License. See `LICENSE.txt` for more information.
 <!-- CONTACT -->
 ## Contact
 
-Nancy Wan - nancy_wan@thecdm.ca
-
+Team HomeE
+Developer: Nancy Wan - nancy_wan@thecdm.ca
 Project Link: [https://github.com/nancywan1004/home-e](https://github.com/nancywan1004/home-e)
 
 <p align="right">(<a href="#top">back to top</a>)</p>
@@ -329,9 +329,7 @@ Project Link: [https://github.com/nancywan1004/home-e](https://github.com/nancyw
 <!-- ACKNOWLEDGMENTS -->
 ## Acknowledgments
 
-* []()
-* []()
-* []()
+Great acknowledgements to faculty, C16 fellow students and community members of the MDM program at Centre for Digital Media for all the supports and feedback.
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
