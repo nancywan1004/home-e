@@ -7,7 +7,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 
-import { COLORS } from '../constants/Colors';
+import { COLORS } from '../../constants/Colors';
 import { useParams } from "react-router-dom";
 
 import { BudgetSettingPanel } from './BudgetSettingPanel';
@@ -51,7 +51,7 @@ const useStyles = makeStyles({
     },
     lowerSection: {
         width: "90%",
-        margin: "auto",
+        margin: "0 0 0 2rem",
         display: "inline-flex",
         justifyContent: "space-between"
     },
@@ -107,7 +107,7 @@ export function UtilitiesPage() {
                     <BudgetSettingPanel uType={params.utilityType?.toUpperCase()}/>
                 </Grid>
                 <Grid item xs={6} md={6}>
-                <RecommendationPanel />
+                    <RecommendationPanel uType={params.utilityType}/>
                 </Grid>
             </Grid>
             <div className={classes.bottomPagination}>

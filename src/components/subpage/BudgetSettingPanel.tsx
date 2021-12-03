@@ -2,12 +2,12 @@
 import React, { useState, useRef } from 'react';
 import { Card, CardContent, Button, Grid, CardMedia, Typography, IconButton, Menu, MenuItem, Modal, Box } from '@material-ui/core';
 import { makeStyles, withStyles } from '@material-ui/core/styles';
-import { COLORS } from '../constants/Colors';
+import { COLORS } from '../../constants/Colors';
 import { BudgetSettingPopup } from './BudgetSettingPopup';
 
 const useStyles = makeStyles({
     root: {
-        margin: "2rem auto auto 2rem",
+        margin: "2rem 1rem auto 2rem",
         backgroundColor: COLORS.whiteBackground,
         //width: "60%",
         border: "0.1px solid #70707020",
@@ -16,7 +16,7 @@ const useStyles = makeStyles({
     },
     greeting: {
         fontFamily: "Futura, sans-serif",
-        color: COLORS.grayFont,
+        color: COLORS.black,
         fontWeight: "bold",
         textAlign: "left",
         marginTop: "-0.5rem"

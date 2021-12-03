@@ -2,9 +2,8 @@ import * as React from 'react';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
-import { COLORS } from '../constants/Colors';
+import { COLORS } from '../../constants/Colors';
 import { makeStyles, withStyles } from '@material-ui/core/styles';
-//import Ruler from 'react-ruler-draggable';
 import Ruler from 'rc-ruler-slider/dist';
 import 'rc-ruler-slider/dist/index.css';
 
@@ -30,7 +29,6 @@ const useStyles = makeStyles({
 
 export function BudgetSettingPopup(props: any) {
     const classes = useStyles();
-    const rulerRef: any = React.useRef();
     const coffeeSaveCalc: any = (value: any) => {
         console.log(value);
         if (value >= 12) {
@@ -50,10 +48,6 @@ export function BudgetSettingPopup(props: any) {
         setBudget(value);
         setCoffee(coffeeSaveCalc(value));
     }
-
-    // const pressingDown = () => rulerRef.current.pressingDown()
-    // const pressingUp = () => rulerRef.current.pressingUp()
-    // const stopPressing = () => rulerRef.current.stopPressing()
 
     const onChanged: any = (value: any) => {
         console.log(value);

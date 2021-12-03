@@ -10,7 +10,7 @@ import Amplify from '@aws-amplify/core'
 import config from './aws-exports'
 import './index.css';
 import App from './App';
-import {UtilitiesPage} from './components/UtilitiesPage';
+import {UtilitiesPage} from './components/subpage/UtilitiesPage';
 import Pagination from '@mui/material/Pagination';
 import PaginationItem from '@mui/material/PaginationItem';
 

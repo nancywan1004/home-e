@@ -10,9 +10,13 @@ import { DonutPanel } from './components/DonutPanel';
 
 import './App.css';
 import { ControlCenter } from './components/controlCenter/ControlCenter';
+import { AchievementPanel } from './components/AchievementPanel';
 
 const useStyles = makeStyles({
-  
+  upperSection: {
+    display: "flex",
+    justifyContent: "space-evenly"
+  },
   dashboard: {
     display: "flex",
     flexDirection: "row",
@@ -25,10 +29,13 @@ function App() {
   const classes = useStyles();
   return (
     <div className="App">
-      <WelcomePanel />
-      <Grid container alignItems="center" className={classes.dashboard}>
-        <Grid item xs={9} md={8}><DonutPanel /></Grid>
-        <Grid item xs={2} md={3}><ControlCenter /></Grid>
+      <Grid container className={classes.upperSection} columns={{ xs: 6, sm: 8, md: 12 }}>
+        <Grid item xs={4} md={8}><WelcomePanel /></Grid>
+        <Grid item xs={1} md={3}><AchievementPanel /></Grid>
+      </Grid>
+      <Grid container alignItems="center" className={classes.dashboard} columns={{ xs: 6, sm: 8, md: 12 }}>
+        <Grid item xs={4} md={8}><DonutPanel /></Grid>
+        <Grid item xs={1} md={3}><ControlCenter /></Grid>
       </Grid>
       {/* <Connect>
       </Connect> */}

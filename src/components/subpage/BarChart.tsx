@@ -2,7 +2,7 @@ import React, { useState, useRef, useEffect } from 'react';
 import { useParams } from "react-router-dom";
 import { makeStyles } from "@material-ui/core"
 import { Bar } from 'react-chartjs-2';
-import { COLORS } from '../constants/Colors';
+import { COLORS } from '../../constants/Colors';
 import { Chart } from 'chart.js';
 import annotationPlugin from 'chartjs-plugin-annotation';
 import ChartDataLabels from 'chartjs-plugin-datalabels';
@@ -178,7 +178,7 @@ export function BarChart() {
           content: 'Area Average',
           enabled: true,
           position: 'end',
-          xAdjust: 70,
+          xAdjust: 90,
           textAlign: 'right'
         },
         click: function({chart, element}: any) {

@@ -216,18 +216,28 @@ Here's the sample code in `src/components/AreaChart.tsx`:
           let thisWeekDatapoint = meta.data[1];
           ctx.restore();
           ctx.beginPath();
-          ctx.moveTo(lastWeekDatapoint.x - 0.05 * width, lastWeekDatapoint.y);           // Create a starting point
+          // Create a starting point
+          ctx.moveTo(lastWeekDatapoint.x - 0.05 * width, lastWeekDatapoint.y);
           if (lastWeekDatapoint.y <= thisWeekDatapoint.y) {
-            ctx.lineTo(lastWeekDatapoint.x - 0.05 * width, lastWeekDatapoint.y + height * 0.35);          // Create a horizontal line
-            ctx.arcTo(lastWeekDatapoint.x - 0.05 * width, lastWeekDatapoint.y + height, lastWeekDatapoint.x + width * 0.3, lastWeekDatapoint.y + height, 60); // Create an arc
-            ctx.lineTo(lastWeekDatapoint.x + width * 0.5, lastWeekDatapoint.y + height);         // Continue with vertical line
+            // Create left vertical line
+            ctx.lineTo(lastWeekDatapoint.x - 0.05 * width, lastWeekDatapoint.y + height * 0.35);
+            // Create left bottom arc
+            ctx.arcTo(lastWeekDatapoint.x - 0.05 * width, lastWeekDatapoint.y + height, lastWeekDatapoint.x + width * 0.3, lastWeekDatapoint.y + height, 60);
+            // Continue wiht horizontal line
+            ctx.lineTo(lastWeekDatapoint.x + width * 0.5, lastWeekDatapoint.y + height);
+            // Create right bottom arc
             ctx.arcTo(lastWeekDatapoint.x + width, lastWeekDatapoint.y + height, lastWeekDatapoint.x + width, lastWeekDatapoint.y + height * 0.35, 55);
           } else {
-            ctx.lineTo(lastWeekDatapoint.x - 0.05 * width, lastWeekDatapoint.y + height * 0.35);          // Create a horizontal line
-            ctx.arcTo(lastWeekDatapoint.x - 0.05 * width, lastWeekDatapoint.y + height * 0.9, lastWeekDatapoint.x + width * 0.5, lastWeekDatapoint.y + height * 0.9, 80); // Create an arc
-            ctx.lineTo(lastWeekDatapoint.x + width * 0.5, lastWeekDatapoint.y + height * 0.9);         // Continue with vertical line
+            // Create left vertical line
+            ctx.lineTo(lastWeekDatapoint.x - 0.05 * width, lastWeekDatapoint.y + height * 0.35);
+            // Create left bottom arc
+            ctx.arcTo(lastWeekDatapoint.x - 0.05 * width, lastWeekDatapoint.y + height * 0.9, lastWeekDatapoint.x + width * 0.5, lastWeekDatapoint.y + height * 0.9, 80);
+            // Continue with horizontal line
+            ctx.lineTo(lastWeekDatapoint.x + width * 0.5, lastWeekDatapoint.y + height * 0.9);
+            // Create right bottom arc
             ctx.arcTo(lastWeekDatapoint.x + width, lastWeekDatapoint.y + height * 0.9, lastWeekDatapoint.x + width, lastWeekDatapoint.y + height * 0.35, 70);
           }
+          // Continue with right vertical line and end path
           ctx.lineTo(lastWeekDatapoint.x + width, thisWeekDatapoint.y);
           ctx.fillStyle = fillColor(lastWeekDatapoint, thisWeekDatapoint) + "40";
           ctx.fill();
@@ -241,14 +251,14 @@ The bar charts on the three subpages were built upon the BarChart of Chartjs. In
 
 In addition, the daily/weekly/monthly tabs were then implemented with the [`Tabs API`](https://mui.com/components/tabs/#main-content) of the material-ui library.
 
-Here's the sample code in `src/components/BarChart.tsx`:
+Here's the sample code in `src/components/subpage/BarChart.tsx`:
 ```js
-        <Tabs value={data}  onChange={handleChange} className={classes.timeTabs} TabIndicatorProps={{style: {display: "none"}}}>
-            <Tab className={classes.timeTab} value={dailyData} label="Day" />
-            <Tab className={classes.timeTab} value={weeklyData} label="Week" />
-            <Tab className={classes.timeTab} value={monthlyData} label="Month" />
-        </Tabs>
-        <Bar data={data} options={options} plugins={[ChartDataLabels] as any} ref={barChart}/>
+    <Tabs value={data}  onChange={handleChange} className={classes.timeTabs} TabIndicatorProps={{style: {display: "none"}}}>
+        <Tab className={classes.timeTab} value={dailyData} label="Day" />
+        <Tab className={classes.timeTab} value={weeklyData} label="Week" />
+        <Tab className={classes.timeTab} value={monthlyData} label="Month" />
+    </Tabs>
+    <Bar data={data} options={options} plugins={[ChartDataLabels] as any} ref={barChart}/>
 ```
 
 **Note:** For more troubleshooting on the Chartjs API, please refer to [3.x.x Migration Documentation](https://www.chartjs.org/docs/3.2.1/getting-started/v3-migration.html).
@@ -265,12 +275,12 @@ Here's the sample code in `src/components/BarChart.tsx`:
   - [x] Rings (`src/components/DonutPanel.tsx`)
   - [x] Control Center (`src/components/controlCener/*`)
   - [ ] Achievement System(TODO) 
-- [ ] Subpage (`src/components/UtilitiesPage.tsx`)
-  - [x] Utility trend bar chart(daily/weekly/monthly) (`src/components/BarChart.tsx`)
-  - [x] Budget setting panel (`src/components/BudgetSettingPanel.tsx`)
-  - [x] Budget setting popup (`src/components/BudgetSettingPopup.tsx`)
-  - [x] Bottom Navigation (`src/components/RecommendationPanel.tsx`)
-  - [ ] Recommendation carousels(Doing) (`src/components/RecommendationPanel.tsx`)
+- [ ] Subpage (`src/components/subpage`)
+  - [x] Utility trend bar chart(daily/weekly/monthly) (`src/components/subpage/BarChart.tsx`)
+  - [x] Budget setting panel (`src/components/subpage/BudgetSettingPanel.tsx`)
+  - [x] Budget setting popup (`src/components/subpage/BudgetSettingPopup.tsx`)
+  - [x] Bottom Navigation (`src/components/subpage/RecommendationPanel.tsx`)
+  - [ ] Recommendation carousels(Doing) (`src/components/subpage/RecommendationPanel.tsx`)
 
 See the [open issues](https://github.com/nancywan1004/home-e/issues) for a full list of proposed features (and known issues).
 

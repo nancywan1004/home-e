@@ -13,10 +13,10 @@ const useStyles = makeStyles({
     },
     title: {
         textAlign: 'left',
-        margin: "2.5rem 0 -0.1rem 2.5rem",
+        margin: "2.5rem 0 -0.1rem 1rem",
         fontFamily: "Futura, sans-serif",
         fontWeight: "normal",
-        color: COLORS.grayFont
+        color: COLORS.black
     },
     donutCharts: {
         margin: "1rem auto 2rem auto",
@@ -36,7 +36,7 @@ const useStyles = makeStyles({
         fontFamily: "Futura, sans-serif",
         fontSize: "24px",
         fontWeight: "normal",
-        color: COLORS.grayFont,
+        color: COLORS.black,
         marginBottom: "-2.5rem"
     }
 });
