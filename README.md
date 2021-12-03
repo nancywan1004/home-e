@@ -1,22 +1,6 @@
-<!-- PROJECT SHIELDS -->
-<!--
-*** I'm using markdown "reference style" links for readability.
-*** Reference links are enclosed in brackets [ ] instead of parentheses ( ).
-*** See the bottom of this document for the declaration of the reference variables
-*** for contributors-url, forks-url, etc. This is an optional, concise syntax you may use.
-*** https://www.markdownguide.org/basic-syntax/#reference-style-links
--->
-[![Contributors][contributors-shield]][contributors-url]
-[![Forks][forks-shield]][forks-url]
-[![Stargazers][stars-shield]][stars-url]
-[![Issues][issues-shield]][issues-url]
-[![MIT License][license-shield]][license-url]
-[![LinkedIn][linkedin-shield]][linkedin-url]
-
-
 <div align="center">
   <a href="https://github.com/nancywan1004/home-e">
-    <img src="public/images/HomeE_logo.png" alt="Logo" width="80" height="30">
+    <img src="public/images/HomeE_logo.png" alt="Logo" width="90" height="30">
   </a>
 
 <h3 align="center">HomeE</h3>
@@ -318,8 +302,8 @@ Distributed under the MIT License. See `LICENSE.txt` for more information.
 <!-- CONTACT -->
 ## Contact
 
-Team HomeE
-Developer: Nancy Wan - nancy_wan@thecdm.ca
+Team HomeE <br />
+Developer: Nancy Wan - nancy_wan@thecdm.ca <br />
 Project Link: [https://github.com/nancywan1004/home-e](https://github.com/nancywan1004/home-e)
 
 <p align="right">(<a href="#top">back to top</a>)</p>
