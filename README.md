@@ -128,12 +128,15 @@ Here's the sample code in `src/components/DonutChart.tsx`
         let fontSize = (height / 300).toFixed(2);
         ctx.font = fontSize + "rem Futura, sans-serif";
         ctx.textBaseline = "top";
+        // Text for current week's cost
         let costText = "$" + props.cost.toFixed(2),
         costTextX = Math.round((width - ctx.measureText(costText).width) / 2),
         costTextY = height / 1.75;
+        // Text for this week's remaining value(i.e. budget - current cost)
         let remainingText = `$${props.target - props.cost < 0 ? 0.00.toFixed(2) : (props.target - props.cost).toFixed(2)} remaining`,
         remainingTextX = Math.round((width - ctx.measureText(remainingText).width) / 2),
         remainingTextY = height / 1.25;
+        // Icon image for the utility type
         let icon = new Image();
         icon.src = props.iconUrl;
         ctx.drawImage(icon, width / 2.25, height / 2.45, width / 10, height / 8);
