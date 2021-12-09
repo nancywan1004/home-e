@@ -260,7 +260,7 @@ Here's the sample code in `src/components/subpage/BarChart.tsx`:
 - [x] Dashboard (`src/App.tsx`)
   - [x] Welcome board (`src/components/WelcomePanel.tsx`)
   - [x] Rings (`src/components/DonutPanel.tsx`)
-  - [x] Control Center (`src/components/controlCener/*`)
+  - [x] Control Center (`src/components/controlCenter/*`)
   - [x] Achievement System (`src/components/AchievementPanel.tsx`)
 - [x] Subpage (`src/components/subpage`)
   - [x] Utility trend bar chart(daily/weekly/monthly) (`src/components/subpage/BarChart.tsx`)
